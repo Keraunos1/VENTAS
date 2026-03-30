@@ -1,4 +1,4 @@
-package practice.app.ventas.bd;
+package practice.app.ventas.model.bd;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
