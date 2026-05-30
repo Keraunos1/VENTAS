@@ -12,6 +12,7 @@ public class SupplierService implements ISupplierService{
     private SupplierRepository supplierRepository;
     @Override
     public List<Supplier> listSuppliers() {
+
         return supplierRepository.findAll();
     }
 }
