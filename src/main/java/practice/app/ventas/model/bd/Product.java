@@ -20,14 +20,14 @@ public class Product {
     private Integer unitsinstock;
     @Column(name = "unitsonorder")
     private Integer unitsonorder;
-    @Column(name = "reorderlever")
-    private Integer reorderlever;
+    @Column(name = "reorderlevel")
+    private Integer reorderlevel;
     @Column(name = "discontinued")
     private Boolean discontinued;
     @ManyToOne
-    @JoinColumn(name = "supplierid")
+    @JoinColumn(name = "SupplierID")
     private Supplier supplier;
     @ManyToOne
-    @JoinColumn(name = "categoryId")
+    @JoinColumn(name = "CategoryID")
     private Category category;
 }
