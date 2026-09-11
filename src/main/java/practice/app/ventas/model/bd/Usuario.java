@@ -23,7 +23,7 @@ public class Usuario {
     @ManyToMany(cascade = CascadeType.MERGE,
     fetch = FetchType.EAGER)
     @JoinTable(name = "usuario_rol",
-        joinColumns = @JoinColumn(name = "idusuario"),
-            inverseJoinColumns = @JoinColumn(name = "idrol"))
+    joinColumns = @JoinColumn(name = "idusuario"),
+    inverseJoinColumns = @JoinColumn(name = "idrol"))
     private Set<Rol> roles;
 }

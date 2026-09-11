@@ -1,4 +1,16 @@
 package practice.app.ventas.service;
 
+import practice.app.ventas.model.bd.Usuario;
+
+import java.util.List;
+
 public interface IUsuarioService {
+
+    Usuario findUserByNomUsuario(String nomusuario);
+
+    Usuario guardarUsuario(Usuario usuario);
+
+    List<Usuario> listarUsuarios();
+
+    Usuario obtenerUsuarioxId(int id);
 }

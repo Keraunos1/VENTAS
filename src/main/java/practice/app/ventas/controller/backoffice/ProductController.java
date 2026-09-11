@@ -55,6 +55,9 @@ public class ProductController {
                 mensaje = "Producto no registrado, error en la BD";
                 respuesta = false;
         }
-        return ProductResponse.builder().mensaje(mensaje).respuesta(respuesta).build();
+        return ProductResponse.builder()
+                .mensaje(mensaje)
+                .respuesta(respuesta)
+                .build();
     }
 }
