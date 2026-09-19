@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import practice.app.ventas.model.bd.Rol;
 import practice.app.ventas.model.bd.Usuario;
+import practice.app.ventas.model.dto.security.UsuarioSecurity;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -33,7 +34,7 @@ public class DetalleUsuarioService implements UserDetailsService {
         return grantedAuthorityList;
     }
     private UserDetails autenticacionUsuario(Usuario usuario, List<GrantedAuthority> authorityList){
-        return new User(
+        UsuarioSecurity usuarioSecurity = new UsuarioSecurity(
                 usuario.getNomusuario(),
                 usuario.getPassword(),
                 usuario.getActivo(),
@@ -42,5 +43,8 @@ public class DetalleUsuarioService implements UserDetailsService {
                 true,
                 authorityList
         );
+        usuarioSecurity.setEmail(usuario.getEmail());
+        usuarioSecurity.setNombre(usuario.getNombres());
+        return usuarioSecurity;
     }
 }

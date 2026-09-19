@@ -1,10 +1,14 @@
 package practice.app.ventas.controller.backoffice;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import practice.app.ventas.model.dto.security.UsuarioSecurity;
 import practice.app.ventas.service.IUsuarioService;
 
 @Controller
@@ -22,6 +26,12 @@ public class LoginController {
     }
     @GetMapping("/dashboard")
     public String dashboard(HttpServletRequest request){
+
+        HttpSession session = request.getSession();
+        UserDetails userDetails = (UserDetails) SecurityContextHolder
+                .getContext().getAuthentication().getPrincipal();
+        UsuarioSecurity usuarioSecurity = (UsuarioSecurity) userDetails;
+        session.setAttribute("nomusuario", usuarioSecurity.getNombre());
         return "backoffice/auth/home";
     }
 }
