@@ -4,11 +4,15 @@ $(document).on("click", "#btnagregar", function(){
     $("#txtnombre").val("");
     $("#txtapellido").val("");
     $("#txtemail").val("");
+    $("#txtemail").prop('readonly' , false)
     $("#txtusuario").val("");
+    $("#txtusuario").prop('readonly' , false)
     $("#txtpassword").val("");
     $("#hddidusuario").val("0");
     $("#switchusuario").hide();
     $("#cbactivo").prop("checked", false);
+    $("#divmsgpassword").show();
+    $("#btnenviar").hide();
     $("#modalusuario").modal("show");
 });
 
@@ -23,9 +27,13 @@ $(document).on("click", ".btnactualizar", function(){
             $("#txtnombre").val(resultado.nombres);
             $("#txtapellido").val(resultado.apellidos);
             $("#txtemail").val(resultado.email);
+            $("#txtemail").prop('readonly' , true)
             $("#txtusuario").val(resultado.nomusuario);
-            $("#hddidusuario").val($(this).attr("data-usuid"));
+            $("#txtusuario").prop('readonly' , true)
+            $("#hddidusuario").val(resultado.idusuario);
             $("#switchusuario").show();
+            $("#divmsgpassword").hide();
+            $("#btnenviar").show();
             if (resultado.activo)
                 $("#cbactivo").prop("checked", true)
             else
@@ -33,26 +41,7 @@ $(document).on("click", ".btnactualizar", function(){
         }
     })
     $("#modalusuario").modal("show");
-    /** NO ESTAMOS USANDO ESTO DENTRO DE LA FUNCIÓN .btnactualizar
-     $("#txtnomproduct").val($(this).attr("data-prodname"));
-    $("#txtunitpriceproduct").val($(this).attr("data-produnit"));
-    $("#hddprodcod").val($(this).attr("data-prodcod"));
 
-    $("#cbocategory").empty();
-    $("#cbosupplier").empty();
-
-    listarCboCategorySupplier(
-        $(this).attr("data-prodcateg"),
-        $(this).attr("data-prodsupp")
-    );
-    $("#switchproducto").show();
-    if($(this).attr("data-proddiscont") === "true"){
-        $("#cbdiscontinued").prop("checked", true);
-    }
-    else{
-        $("#cbdiscontinued").prop("checked", false);
-    }
-    $("#modalproduct").modal("show");*/
 });
 /* Lo veremos en la clase 8*/
 $(document).on("click", "#btnguardar", function(){
