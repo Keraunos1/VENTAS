@@ -17,30 +17,30 @@ import practice.app.ventas.service.DetalleUsuarioService;
 public class SecurityConfig {
     private DetalleUsuarioService detalleUsuarioService;
     @Bean
-    public SecurityFilterChain configSecurity(HttpSecurity httpSecurity)
-            throws Exception{
+    public SecurityFilterChain configSecurity(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .authorizeHttpRequests(
-                        auth -> auth.requestMatchers("/auth/login",
-                                        // Permit el acceso a cualquier URL que empiece con resources
-                                        "/resources/**",
-                                        "/static/**",
-                                        "/css/**",
-                                        "/js/**")
-                                .permitAll()
-                                .anyRequest()
-                                .authenticated()
-                ).formLogin(
-                        login->
-                                login.loginPage("/auth/login")
-                                        .defaultSuccessUrl("/auth/login-success")
-                                        .usernameParameter("nomusuario")
-                                        .passwordParameter("password")
-                ).logout(
-                        logout->
-                                logout.logoutSuccessUrl("/auth/login")
-                                        .invalidateHttpSession(true)
-                ).authenticationProvider(authenticationProvider());
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/auth/login",
+                                "/resources/**",
+                                "/static/**",
+                                "/css/**",
+                                "/js/**"
+                        ).permitAll()
+                        .anyRequest().authenticated()
+                )
+                .formLogin(login -> login
+                        .loginPage("/auth/login")
+                        .defaultSuccessUrl("/auth/login-success")
+                        .usernameParameter("nomusuario")
+                        .passwordParameter("password")
+                )
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/auth/login")
+                        .invalidateHttpSession(true)
+                )
+                .authenticationProvider(authenticationProvider());
+
         return httpSecurity.build();
     }
     @Bean
