@@ -13,4 +13,6 @@ public interface IUsuarioService {
     List<Usuario> listarUsuarios();
 
     Usuario obtenerUsuarioxId(int id);
+
+    void actualizarUsuario(Usuario usuario);
 }

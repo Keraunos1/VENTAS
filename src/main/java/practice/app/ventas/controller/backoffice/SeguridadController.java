@@ -9,6 +9,8 @@ import practice.app.ventas.model.dto.request.UsuarioRequest;
 import practice.app.ventas.model.dto.response.ResultadoResponse;
 import practice.app.ventas.service.IUsuarioService;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Controller
 @RequestMapping("/seguridad")
@@ -35,14 +37,16 @@ public class SeguridadController {
         boolean respuesta = true;
         try {
             Usuario usuario = new Usuario();
+            usuario.setNombres(usuarioRequest.getNombres());
+            usuario.setApellidos(usuarioRequest.getApellidos());
             if (usuarioRequest.getIdusuario() > 0){
                 usuario.setIdusuario(usuarioRequest.getIdusuario());
+                usuario.setActivo(usuarioRequest.getActivo());
+                iUsuarioService.actualizarUsuario(usuario);
             }
             else {
-                usuario.setPassword(usuarioRequest.getPassword());
-                usuario.setNombres(usuarioRequest.getNombres());
-                usuario.setApellidos(usuarioRequest.getApellidos());
-                usuario.setActivo(usuarioRequest.getActivo());
+                usuario.setNomusuario(usuarioRequest.getNomusuario());
+                usuario.setEmail(usuarioRequest.getEmail());
                 iUsuarioService.guardarUsuario(usuario);
             }
         }catch (Exception ex){
@@ -51,5 +55,10 @@ public class SeguridadController {
 
         }
         return ResultadoResponse.builder().mensaje(mensaje).respuesta(respuesta).build();
+    }
+    @GetMapping("/usuario/lista")
+    @ResponseBody
+    public List<Usuario> listarUsuarios() {
+        return iUsuarioService.listarUsuarios();
     }
 }
